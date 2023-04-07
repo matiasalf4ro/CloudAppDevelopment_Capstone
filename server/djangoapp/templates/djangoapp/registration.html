@@ -4,8 +4,50 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/227685d263.js" crossorigin="anonymous"></script>
+
 </head>
-    <body>
-    <!--Add a registration form here -->
-    </body>
+<body style="font-family: OPEN SANS;">
+<section class="p-4 text-center">
+{% block content %}
+    <form action="{% url 'djangoapp:registration' %}" method="post">
+        <div class="container-fluid">
+            {% csrf_token %}
+            <h2 class="text-center">Sign Up</h2>
+            <hr>
+            
+            <form>
+                <div class="form-group row">
+                    <label for="username"><i class="mt-2 fa-solid fa-user"></i></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter a username " name="username" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="firstname"><i class="fa-solid fa-circle-info"></i></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter your first name " name="firstname" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="lastname"><i class="fa-solid fa-circle-info"></i></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter your last name " name="lastname" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="passw"><i class="mt-2 fa-solid fa-key"></i></label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control form-control-sm" placeholder="Enter a password" name="passw" required>
+                    </div>
+                </div>
+            <button class="btn btn-light btn-sm btn-block" type="submit">Sign up</button>
+        </div>
+    </form>
+{% endblock %}
+</section>
+</body>
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,7 @@
     <script src="https://kit.fontawesome.com/227685d263.js" crossorigin="anonymous"></script>
 </head>
 
-    <body>
+    <body style="font-family: OPEN SANS;">
         <nav>
             <div class="container-fluid mt-2">
                 <div class="row">
@@ -23,23 +24,38 @@
         
                     <div class="mt-1 col-sm nav justify-content-center">
                       <li class="nav-item text-center">
-                          <a style="color:black" class="nav-link font-weight-normal" href="/djangoapp/">Home</a>
+                          <a style="color:black" class="nav-link font-weight-bold" href="/djangoapp/">Home</a>
                         </li>
                         <li class="nav-item text-center">
-                          <a style="color:black" class="nav-link font-weight-bold" href="/djangoapp/about/">About</a>
+                          <a style="color:black" class="nav-link font-weight-normal" href="/djangoapp/about/">About</a>
                         </li>
                         <li class="nav-item text-center">
                           <a style="color:black" class="nav-link font-weight-normal" href="/djangoapp/contact/">Contact</a>
                         </li>
                     </div>
-        
+                    
+                    {% if user.is_authenticated %}
                     <div class="mt-1 col-sm nav justify-content-end">
                         <li class="nav-item text-center">
-                          <a style="color:black" class="nav-link font-weight-normal" href="#"><i class="fa-solid fa-circle-user"></i> Matias Alfaro </a>
+                          <a style="color:black" class="nav-link font-weight-normal" href="#"><i class="fa-solid fa-circle-user"></i>{{ user.first_name }} ({{ user.last_name }})</a>
                         </li>
                         <li class="mt-1 nav-item text-center">
-                          <button type="button" class="btn btn-light btn-sm">Log Out <i class="ms-1 fa-solid fa-arrow-right-from-bracket"></i></button>
+                          <button type="button" class="btn btn-light btn-sm" href="{% url 'djangoapp:logout' %}">Log Out <i class="ms-1 fa-solid fa-arrow-right-from-bracket"></i></button>
                         </li>
+                    </div>
+
+                    {% else %}
+                    <div class="mt-1 col-sm nav justify-content-end">
+                        <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm" placeholder="Username" name="username">
+                                <input type="password" class="form-control form-control-sm" placeholder="Password" name="password">
+                                <button type="submit" class="btn btn-dark btn-sm">Login</button>
+                                <button type="button" class="btn btn-light btn-sm"  href="djangoapp/registration.html">Sign Up</button>
+                            </div>   
+                        </form>
+                    {% endif %}
                     </div>
                     
                   </div>
